@@ -9,12 +9,12 @@
 </head>
 <body>
     <script id="task_src" type="text/x-handlebars-template">
-        {{task title}}
+        {{task-item task}}
     </script>
 
     <script id="taskList_src" type="text/x-handlebars-template">
         {{#each tasks}}
-            {{task title}}
+            {{task-item task}}
         {{/each}}
     </script>
 

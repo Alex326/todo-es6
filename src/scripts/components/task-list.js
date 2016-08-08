@@ -11,26 +11,36 @@ class TaskList extends CreateForm {
         this.title = title;
         this.tasks = [];
         this.ui = ui;
+        const self = this;
 
         const template = Handlebars.compile($(this.ui.in).html());
         $(this.ui.out).html(template({tasks: this.tasks}));
 
-        Handlebars.registerHelper('task', function(title) {
-            return new Handlebars.SafeString(`<li>${title}</li>`);
+        Handlebars.registerHelper('task-item', function(task) {
+            console.log(task);
+            return new Handlebars.SafeString(`
+                <li class="task" data-task-id=${task.id}>
+                    <input type="checkbox">
+                    ${task.title}
+                    <input type="button" value="X">
+                </li>`);
         });
 
-        const self = this;
         $(this.ui.createForm).submit(function (event){
             event.preventDefault();
             let value = $(this.elements.input).val();
             self.addTask(new Task(value));
+        });
+
+        $('[data-task-id]').find('*:checkbox').change(function (event) {
+            console.log(this);
         });
     }
 
     addTask(task) {
         this.tasks.push(task);
         const template = Handlebars.compile($(this.ui.task).html());
-        $(this.ui.out).append(template({title: task.title}));
+        $(this.ui.out).append(template({task: task}));
         console.log(this.tasks);
     }
 

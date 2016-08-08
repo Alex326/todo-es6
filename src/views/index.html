@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1">
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./bundle.js"></script>
+    <title>Todo ES6</title>
+</head>
+<body>
+    <script id="task_src" type="text/x-handlebars-template">
+        {{task title}}
+    </script>
+
+    <script id="taskList_src" type="text/x-handlebars-template">
+        {{#each tasks}}
+            {{task title}}
+        {{/each}}
+    </script>
+
+    <div class="container">
+        <form class="taskCreator">
+            <input class="taskCreator__input" name="input">
+            <button class="taskCreator__button" name="button">Add</button>
+        </form>
+        <ul id="taskList_dist"></ul>
+    </div>
+</body>
+</html>

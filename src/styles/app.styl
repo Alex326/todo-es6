@@ -1,9 +1,80 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
+body
+  font-family Georgia sans-serif
+  font-size 16px
+  color #3c3c3c
+
 a
   outline none !important
 
+.ListCreator
+  background: #f8f8f8
+  padding 1rem 20rem
+
 .taskBoard
   min-height 100vh
-  background #bebebe
+  background #33a0ce
 
+.task
+  position: relative
+  margin-left -2rem
+  padding 5px 0
+  &__checkbox
+    margin-right 10px !important
+    display inline-block
+  &__button_delete
+    position absolute
+    font-style normal
+    height 2.5rem
+    right 1rem
+    background: #f8f8f8
+    color #a8a8a8
+    font-weight: 700
+    text-decoration: none
+    user-select: none
+    outline: none
+    border: 2px solid #e7e7e7
+    border-radius: 1px
+    &:hover,
+    &:active
+      border none
+      color #000000
+  &_isDone
+      position: relative
+      text-decoration line-through
+      font-style italic
+      color #3f5a54
+  &Creator
+    padding-bottom 1rem
+    &__input
+      width 80%
+    &__input,
+    &__button
+      background: #f8f8f8
+      color #a8a8a8
+      font-weight: 700
+      text-decoration: none
+      user-select: none
+      outline: none
+      border: 2px solid #e7e7e7
+      border-radius: 1px
+      &:active,
+      &:focus
+        color #000000
+    &__button
+      &:hover,
+      &:active
+      &:focus
+        outline none
+        border none
+        color #000000
+  &List
+    background #f8f8f8
+    border .5rem solid transparent
+    border-color #e7e7e7
+    width 30rem
+    padding 1rem
+    &_dist,
+    &_dist2
+      list-style-type none

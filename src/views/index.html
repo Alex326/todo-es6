@@ -8,22 +8,42 @@
     <title>Todo ES6</title>
 </head>
 <body>
-    <script id="task_src" type="text/x-handlebars-template">
+    <script class="task_src" type="text/x-handlebars-template">
         {{task-item task}}
     </script>
 
-    <script id="taskList_src" type="text/x-handlebars-template">
+    <script class="taskList_src" type="text/x-handlebars-template">
         {{#each tasks}}
             {{task-item task}}
         {{/each}}
     </script>
 
-    <div class="container">
-        <form class="taskCreator">
-            <input class="taskCreator__input" name="input">
-            <button class="taskCreator__button" name="button">Add</button>
-        </form>
-        <ul id="taskList_dist"></ul>
+    <div class="ListCreator input-group">
+        <input class="ListCreator__input form-control" placeholder="Print label for tasks list" name="input" maxlength="25">
+        <span class="input-group-btn">
+            <button class="ListCreator__button btn btn-default" name="button">Add</button>
+        </span>
     </div>
+
+    <div class="container">
+        <div class="taskList">
+            <form class="taskCreator">
+                <input class="taskCreator__input" name="input" maxlength="25">
+                <button class="taskCreator__button" name="button">Add</button>
+            </form>
+            <ul class="taskList_dist"></ul>
+            <ul class="taskList_done"></ul>
+        </div>
+        <br>
+        <div class="taskList">
+            <form class="taskCreator2">
+                <input class="taskCreator__input" name="input" maxlength="25">
+                <button class="taskCreator__button" name="button">Add</button>
+            </form>
+            <ul class="taskList_dist2"></ul>
+            <ul class="taskList_done"></ul>
+        </div>
+    </div>
+
 </body>
 </html>

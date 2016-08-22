@@ -1,41 +1,47 @@
 import createID from '../lib/createid';
 import $ from 'jquery';
 import Handlebars from 'handlebars';
-import CreateForm from './task-form';
 import Task from './task';
 
-class TaskList extends CreateForm {
+class TaskList {
     constructor(title, ui) {
-        super(ui.createForm);
         this.id = createID();
         this.title = title;
         this.tasks = [];
         this.ui = ui;
+
         const self = this;
 
-        const template = Handlebars.compile($(this.ui.in).html());
-        $(this.ui.out).html(template({tasks: this.tasks}));
+
 
         Handlebars.registerHelper('task-item', function(task) {
-            return new Handlebars.SafeString(`
-                <li class="task" data-task-id=${task.id}>
-                    <input type="checkbox" class="task__checkbox">
-                    <span class="task__text">${task.title}</span>
-                    <input type="button" class="task__button_delete" value="X">
-                </li>`);
+            const template = Handlebars.compile($(this.ui.task).html())({task: task});
+            return new Handlebars.SafeString(template);
         });
 
-        $(this.ui.createForm).submit(function (event){
-            event.preventDefault();
-            let value = $(this.elements.input).val();
-            self.addTask(new Task(value));
+        Handlebars.registerHelper('task-list', function(taskList) {
+            const template = Handlebars.compile($(this.ui.in).html())({list: taskList});
+            return new Handlebars.SafeString(template);
         });
+
+        setTimeout(()=>
+            $(`[data-list-id=${this.id}]`).find($(this.ui.createForm)).submit(function (event){
+                event.preventDefault();
+                let value = $(this.elements.input).val();
+                self.addTask(new Task(value));
+                $(this.elements.input).val('');
+            }),1);
+
+
+
+        this.load();
+        this.save();
     }
 
     addTask(task) {
         this.tasks.push(task);
         const template = Handlebars.compile($(this.ui.task).html());
-        $(this.ui.out).append(template({task: task}));
+        $(`[data-list-id=${this.id}]`).find(this.ui.out).append(template({task: task}));
 
         const taskUi = $(`[data-task-id=${task.id}]`);
 
@@ -53,6 +59,22 @@ class TaskList extends CreateForm {
         });
     }
 
+    save(){
+        let value = JSON.stringify(this.tasks);
+        console.log(value);
+        // localStorage.setItem(key,value);
+        localStorage.setItem('tasks',value);
+    }
+
+    load(){
+        // let len = localStorage.length;
+        // if(len > 0) {
+        //     for(var i = 0; i<len; i++) {
+        //         let key = localStorage.key(i);
+        //         let value = localStorage.value(i);
+        //     }
+        // }
+    }
 }
 
 

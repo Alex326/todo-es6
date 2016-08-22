@@ -8,42 +8,51 @@
     <title>Todo ES6</title>
 </head>
 <body>
+    <!-- создание элемента списка -->
     <script class="task_src" type="text/x-handlebars-template">
-        {{task-item task}}
+        <li class="task" data-task-id={{task.id}}>
+            <input type="checkbox" class="task__checkbox">
+            <span class="task__text">{{task.title}}</span>
+            <input type="button" class="task__button_delete" value="X">
+        </li>
     </script>
 
     <script class="taskList_src" type="text/x-handlebars-template">
-        {{#each tasks}}
-            {{task-item task}}
-        {{/each}}
+        <div class="tasksList" data-list-id={{list.id}}>
+            <h2>{{list.title}}</h2>
+            <form class="taskCreator">
+                <input class="taskCreator__input" name="input" required>
+                <button class="taskCreator__button" name="button">Add</button>
+            </form>
+
+            <ul class="taskList taskList_dist">
+                {{#each list.tasks}}
+                    {{task-item task}}
+                {{/each}}
+            </ul>
+        </div>
     </script>
 
-    <div class="ListCreator input-group">
-        <input class="ListCreator__input form-control" placeholder="Print label for tasks list" name="input" maxlength="25">
-        <span class="input-group-btn">
-            <button class="ListCreator__button btn btn-default" name="button">Add</button>
-        </span>
-    </div>
+     <!--создание списков-->
+    <script class="taskLists_src" type="text/x-handlebars-template">
+        <form class="listCreator input-group">
+            <input class="ListCreator__input form-control" placeholder="Print label for tasks list" name="input" required>
+            <span class="input-group-btn">
+                <button class="ListCreator__button btn btn-default" name="button">Add</button>
+            </span>
+        </form>
+        <div class="taskLists">
+            {{#if lists.length}}
+                {{#each lists}}
+                    {{task-list list}}
+                {{/each}}
+            {{/if}}
+        </div>
+    </script>
 
-    <div class="container">
-        <div class="taskList">
-            <form class="taskCreator">
-                <input class="taskCreator__input" name="input" maxlength="25">
-                <button class="taskCreator__button" name="button">Add</button>
-            </form>
-            <ul class="taskList_dist"></ul>
-            <ul class="taskList_done"></ul>
-        </div>
-        <br>
-        <div class="taskList">
-            <form class="taskCreator2">
-                <input class="taskCreator__input" name="input" maxlength="25">
-                <button class="taskCreator__button" name="button">Add</button>
-            </form>
-            <ul class="taskList_dist2"></ul>
-            <ul class="taskList_done"></ul>
-        </div>
-    </div>
+    <div class="Board taskLists_dist"></div>
+    <input type="button" class="button_save" value="save">
+    <input type="button" class="button_load" value="load">
 
 </body>
 </html>

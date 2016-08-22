@@ -3,14 +3,13 @@ import $ from 'jquery';
 
 
 class Task {
-    constructor(title, ui) {
+    constructor(title, ui = '.task') {
         this.id = createID();
-        this.ui = $('.task');
+        this.ui = ui;
         this.title = title;
         this.isDone = false;
-        // this.checkbox = $('.checkbox_ready');
-
     }
 }
+
 
 export default Task;

@@ -8,7 +8,7 @@ body
 a
   outline none !important
 
-.ListCreator
+.listCreator
   background: #f8f8f8
   padding 1rem 20rem
 
@@ -20,6 +20,12 @@ a
   position: relative
   margin-left -2rem
   padding 5px 0
+  &sList
+    display inline-block
+    border .5rem solid transparent
+    border-color #e7e7e7
+    width 30rem
+    padding 1rem
   &__checkbox
     margin-right 10px !important
     display inline-block
@@ -69,12 +75,10 @@ a
         outline none
         border none
         color #000000
-  &List
+  &Lists
+    width 100%
+    display: inline-block
     background #f8f8f8
-    border .5rem solid transparent
-    border-color #e7e7e7
-    width 30rem
-    padding 1rem
     &_dist,
     &_dist2
       list-style-type none
